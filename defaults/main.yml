@@ -1,0 +1,47 @@
+# roles/httpd/defaults/main.yml
+---
+
+httpd_access_log: logs/access_log
+httpd_access_log_ssl: logs/ssl_access_log
+httpd_document_root: '/var/www/html'
+httpd_error_log: logs/error_log
+httpd_error_log_ssl: logs/ssl_error_log
+httpd_extended_status: 'On'
+httpd_listen: 80
+httpd_listen_ssl: 443
+httpd_log_level: warn
+httpd_log_level_ssl: warn
+httpd_server_admin: root@localhost
+httpd_server_root: '/etc/httpd'
+httpd_server_tokens: Prod
+httpd_ssl_certificate_file: localhost.crt
+httpd_ssl_certificate_key_file: localhost.key
+httpd_status_enable: false
+httpd_status_location: '/server-status'
+httpd_status_require: 'host localhost'
+
+# SSL configuration, "Modern profile" according to:
+# https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=apache-2.4.34&openssl=1.1.0i&hsts=yes&profile=modern
+httpd_ssl_cipher_suite: >
+  'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256'
+httpd_ssl_compression: 'off'
+httpd_ssl_honor_cipher_order: 'on'
+httpd_ssl_protocol: 'all -SSLv3 -TLSv1 -TLSv1.1'
+httpd_ssl_session_tickets: 'off'
+httpd_ssl_stapling_responder_timeout: 5
+httpd_ssl_stapling_return_responder_errors: 'off'
+httpd_ssl_stapling_cache: 'shmcb:/var/run/ocsp(128000)'
+httpd_ssl_use_stapling: 'on'
+repo_webroot: /var/www/html
+repo_image_path: /var/www/html/image
+repo_qcow2_images:
+  - name: CentOS-8.qcow2
+    url: https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.2.2004-20200611.2.x86_64.qcow2
+  - name: CentOS-7.qcow2
+    url: https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2
+repo_iso_path: /var/www/html/iso
+repo_iso_mounts:
+  - { name: 'Fedora 32', mount: '{{ repo_webroot }}/linux/fedora/32', iso_url: 'https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/32/Server/x86_64/iso/Fedora-Server-dvd-x86_64-32-1.6.iso', iso_name: 'Fedora32.iso' }
+  - { name: 'CentOS 8.2.2004', mount: '{{ repo_webroot }}/linux/centos/8.2.2004', iso_url: 'http://linux.cc.lehigh.edu/centos/8.2.2004/isos/x86_64/CentOS-8.2.2004-x86_64-dvd1.iso', iso_name: 'CentOS82.iso' }
+  - { name: 'CentOS 7.8.2003', mount: '{{ repo_webroot }}/linux/centos/7.8.2003', iso_url: 'http://linux.cc.lehigh.edu/centos/7.8.2003/isos/x86_64/CentOS-7-x86_64-DVD-2003.iso', iso_name: 'CentOS78.iso' }
+  

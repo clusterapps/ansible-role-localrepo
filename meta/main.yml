@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  role_name: localrepo
+  author: Michael Cleary
+  comapny: ClusterApps
+  description: configures on-prem repo for rpms and other things.
+  license: BSD
+  min_ansible_version: 2.10
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+  categories:
+    - web
+dependencies: []
